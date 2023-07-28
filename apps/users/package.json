@@ -1,0 +1,10 @@
+{
+  "name": "@graphql-federation/users",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@apollo/federation": "^0.38.1",
+    "@apollo/subgraph": "^2.5.1"
+  }
+}
