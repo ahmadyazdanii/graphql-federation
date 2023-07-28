@@ -1,0 +1,9 @@
+{
+  "name": "@graphql-federation/gateway",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@apollo/gateway": "^2.5.1"
+  }
+}
