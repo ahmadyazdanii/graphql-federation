@@ -1,0 +1,10 @@
+**/test
+**/__mocks__
+**/node_modules
+**/dist
+**/coverage
+**/.*
+!.eslintrc.js
+**/Dockerfile
+README.md
+yarn.lock
