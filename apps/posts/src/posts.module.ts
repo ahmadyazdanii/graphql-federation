@@ -8,6 +8,7 @@ import {
   ApolloFederationDriverConfig,
 } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
+import { PostsRepository } from './posts.repository';
 
 @Module({
   imports: [
@@ -16,6 +17,6 @@ import { GraphQLModule } from '@nestjs/graphql';
       autoSchemaFile: true,
     }),
   ],
-  providers: [PostsResolver, PostsService],
+  providers: [PostsResolver, PostsService, PostsRepository],
 })
 export class PostsModule {}
