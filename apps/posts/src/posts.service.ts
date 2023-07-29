@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePostInput } from './dto/create-post.input';
 import { UpdatePostInput } from './dto/update-post.input';
+import { PostsRepository } from './posts.repository';
+import { UUID } from 'crypto';
 
 @Injectable()
 export class PostsService {
+  constructor(private readonly postsRepository: PostsRepository) {}
+
   create(createPostInput: CreatePostInput) {
-    return 'This action adds a new post';
+    return this.postsRepository.insertOne(createPostInput);
   }
 
   findAll() {
-    return `This action returns all posts`;
+    return this.postsRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} post`;
+  findOne(id: UUID) {
+    const post = this.postsRepository.findById(id);
+
+    if (!post) {
+      throw new NotFoundException("The post doesn't exists");
+    } else {
+      return post;
+    }
   }
 
-  update(id: number, updatePostInput: UpdatePostInput) {
-    return `This action updates a #${id} post`;
+  update(id: UUID, updatePostInput: UpdatePostInput) {
+    const updatedPost = this.postsRepository.updateOne(id, updatePostInput);
+
+    if (!updatedPost) {
+      throw new NotFoundException("The post doesn't exists");
+    } else {
+      return updatedPost;
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  remove(id: UUID) {
+    const removedPost = this.postsRepository.deleteOne(id);
+
+    if (!removedPost) {
+      throw new NotFoundException("The post doesn't exists");
+    } else {
+      return removedPost;
+    }
   }
 }
