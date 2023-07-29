@@ -1,7 +1,14 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field } from '@nestjs/graphql';
+import { UUID } from 'crypto';
 
 @ObjectType()
 export class Post {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => String)
+  id: UUID;
+
+  @Field(() => String)
+  title: string;
+
+  @Field(() => String)
+  description: string;
 }
