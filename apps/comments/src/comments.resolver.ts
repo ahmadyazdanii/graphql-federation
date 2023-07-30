@@ -1,15 +1,18 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { CommentsService } from './comments.service';
 import { Comment } from './entities/comment.entity';
 import { CreateCommentInput } from './dto/create-comment.input';
 import { UpdateCommentInput } from './dto/update-comment.input';
+import { UUID } from 'crypto';
 
 @Resolver(() => Comment)
 export class CommentsResolver {
   constructor(private readonly commentsService: CommentsService) {}
 
   @Mutation(() => Comment)
-  createComment(@Args('createCommentInput') createCommentInput: CreateCommentInput) {
+  createComment(
+    @Args('createCommentInput') createCommentInput: CreateCommentInput,
+  ) {
     return this.commentsService.create(createCommentInput);
   }
 
@@ -19,17 +22,20 @@ export class CommentsResolver {
   }
 
   @Query(() => Comment, { name: 'comment' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => String }) id: UUID) {
     return this.commentsService.findOne(id);
   }
 
   @Mutation(() => Comment)
-  updateComment(@Args('updateCommentInput') updateCommentInput: UpdateCommentInput) {
-    return this.commentsService.update(updateCommentInput.id, updateCommentInput);
+  updateComment(
+    @Args('id', { type: () => String }) id: UUID,
+    @Args('updateCommentInput') updateCommentInput: UpdateCommentInput,
+  ) {
+    return this.commentsService.update(id, updateCommentInput);
   }
 
   @Mutation(() => Comment)
-  removeComment(@Args('id', { type: () => Int }) id: number) {
+  removeComment(@Args('id', { type: () => String }) id: UUID) {
     return this.commentsService.remove(id);
   }
 }
