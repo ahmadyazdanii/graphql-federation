@@ -1,26 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCommentInput } from './dto/create-comment.input';
 import { UpdateCommentInput } from './dto/update-comment.input';
+import { CommentsRepository } from './comments.repository';
+import { UUID } from 'crypto';
 
 @Injectable()
 export class CommentsService {
+  constructor(private readonly commentsRepository: CommentsRepository) {}
+
   create(createCommentInput: CreateCommentInput) {
-    return 'This action adds a new comment';
+    return this.commentsRepository.insertOne(createCommentInput);
   }
 
   findAll() {
-    return `This action returns all comments`;
+    return this.commentsRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} comment`;
+  findOne(id: UUID) {
+    return this.commentsRepository.findById(id);
   }
 
-  update(id: number, updateCommentInput: UpdateCommentInput) {
-    return `This action updates a #${id} comment`;
+  update(id: UUID, updateCommentInput: UpdateCommentInput) {
+    return this.commentsRepository.updateOne(id, updateCommentInput);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} comment`;
+  remove(id: UUID) {
+    return this.commentsRepository.deleteOne(id);
   }
 }
