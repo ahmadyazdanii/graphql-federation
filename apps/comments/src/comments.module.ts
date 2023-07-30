@@ -4,13 +4,15 @@ import { CommentsResolver } from './comments.resolver';
 import {
   ApolloFederationDriverConfig,
   ApolloFederationDriver,
+  ApolloDriverConfig,
+  ApolloDriver,
 } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
-    GraphQLModule.forRoot<ApolloFederationDriverConfig>({
-      driver: ApolloFederationDriver,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
       autoSchemaFile: true,
     }),
   ],
