@@ -1,7 +1,11 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field } from '@nestjs/graphql';
+import { UUID } from 'crypto';
 
 @ObjectType()
 export class Comment {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => String)
+  id: UUID;
+
+  @Field(() => String)
+  message: string;
 }
