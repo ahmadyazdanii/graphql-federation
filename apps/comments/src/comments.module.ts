@@ -8,6 +8,7 @@ import {
   ApolloDriver,
 } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
+import { CommentsRepository } from './comments.repository';
 
 @Module({
   imports: [
@@ -16,6 +17,6 @@ import { GraphQLModule } from '@nestjs/graphql';
       autoSchemaFile: true,
     }),
   ],
-  providers: [CommentsResolver, CommentsService],
+  providers: [CommentsResolver, CommentsService, CommentsRepository],
 })
 export class CommentsModule {}
