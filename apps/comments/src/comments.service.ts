@@ -27,4 +27,12 @@ export class CommentsService {
   remove(id: UUID) {
     return this.commentsRepository.deleteOne(id);
   }
+
+  forUser(user_id: UUID) {
+    return this.commentsRepository.findByUserId(user_id);
+  }
+
+  forPost(post_id: UUID) {
+    return this.commentsRepository.findByPostId(post_id);
+  }
 }

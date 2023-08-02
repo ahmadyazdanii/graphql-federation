@@ -1,9 +1,18 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import { CommentsService } from './comments.service';
 import { Comment } from './entities/comment.entity';
 import { CreateCommentInput } from './dto/create-comment.input';
 import { UpdateCommentInput } from './dto/update-comment.input';
 import { UUID } from 'crypto';
+import { User } from './entities/user.entity';
+import { Post } from './entities/post.entity';
 
 @Resolver(() => Comment)
 export class CommentsResolver {
@@ -37,5 +46,15 @@ export class CommentsResolver {
   @Mutation(() => Comment)
   removeComment(@Args('id', { type: () => String }) id: UUID) {
     return this.commentsService.remove(id);
+  }
+
+  @ResolveField(() => User)
+  user(@Parent() comment: Comment): any {
+    return { __typename: 'User', id: comment.user_id };
+  }
+
+  @ResolveField(() => Post)
+  post(@Parent() comment: Comment): any {
+    return { __typename: 'Post', id: comment.post_id };
   }
 }

@@ -61,4 +61,32 @@ export class CommentsRepository {
 
     return undefined;
   }
+
+  findByUserId(user_id: UUID) {
+    const userComments: Comment[] = [];
+
+    for (let index = 0; index < this.repository.length; index++) {
+      const post = this.repository[index];
+
+      if (post.user_id === user_id) {
+        userComments.push(post);
+      }
+    }
+
+    return userComments;
+  }
+
+  findByPostId(post_id: UUID) {
+    const PostComments: Comment[] = [];
+
+    for (let index = 0; index < this.repository.length; index++) {
+      const post = this.repository[index];
+
+      if (post.post_id === post_id) {
+        PostComments.push(post);
+      }
+    }
+
+    return PostComments;
+  }
 }
