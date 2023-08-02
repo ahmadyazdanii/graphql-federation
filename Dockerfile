@@ -1,6 +1,6 @@
-ARG SERVICE_NAME="users"
-ARG PATH_TO_SERVICE="apps/${SERVICE_NAME}"
-ARG WORKDIR="/var/www/app"
+ARG SERVICE_NAME
+ARG PATH_TO_SERVICE=apps/${SERVICE_NAME}
+ARG WORKDIR=/var/www/app
 
 # Build Stage
 FROM node:alpine3.18 as build
