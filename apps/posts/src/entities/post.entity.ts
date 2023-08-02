@@ -1,14 +1,22 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field, ID, Directive } from '@nestjs/graphql';
 import { UUID } from 'crypto';
+import { User } from './user.entity';
 
 @ObjectType()
+@Directive('@key(fields: "id")')
 export class Post {
-  @Field(() => String)
+  @Field(() => ID)
   id: UUID;
 
-  @Field(() => String)
+  @Field()
   title: string;
 
-  @Field(() => String)
+  @Field()
   description: string;
+
+  @Field()
+  user_id: UUID;
+
+  @Field(() => User)
+  user?: User;
 }

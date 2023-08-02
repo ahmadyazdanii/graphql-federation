@@ -4,4 +4,5 @@ export interface Post {
   id: UUID;
   title: string;
   description: string;
+  user_id: UUID;
 }

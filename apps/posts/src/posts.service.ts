@@ -45,4 +45,8 @@ export class PostsService {
       return removedPost;
     }
   }
+
+  forUser(user_id: UUID) {
+    return this.postsRepository.findByUserId(user_id);
+  }
 }

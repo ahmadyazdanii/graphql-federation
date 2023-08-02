@@ -61,4 +61,18 @@ export class PostsRepository {
 
     return undefined;
   }
+
+  findByUserId(user_id: UUID): Post[] {
+    const userPosts: Post[] = [];
+
+    for (let index = 0; index < this.repository.length; index++) {
+      const post = this.repository[index];
+
+      if (post.user_id === user_id) {
+        userPosts.push(post);
+      }
+    }
+
+    return userPosts;
+  }
 }

@@ -1,10 +1,14 @@
 import { InputType, Field } from '@nestjs/graphql';
+import { UUID } from 'crypto';
 
 @InputType()
 export class CreatePostInput {
-  @Field(() => String)
+  @Field()
   title: string;
 
-  @Field(() => String)
+  @Field()
   description: string;
+
+  @Field()
+  user_id: UUID;
 }
