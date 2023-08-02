@@ -1,5 +1,5 @@
 {
-  "name": "@graphql-federation/posts",
+  "name": "@gql-federation/post",
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
