@@ -10,7 +10,7 @@ You must have [Docker](https://www.docker.com/) installed on your machine.
 
 ## Running
 
-Execute the following command to run the projects:
+Execute the following command to run the project:
 
 ```bash
 # New Docker versions
@@ -20,7 +20,7 @@ docker compose up -d --build
 docker-compose up -d --build
 ```
 
-Now, You can access to the project API via [http://localhost:3000](http://localhost:3000). All services didn't run on production mode so, You can access to playground also.
+Now, You can access to the project API via [http://localhost:3000/graphql](http://localhost:3000/graphql). All services didn't run on production mode so, You can access to playground also.
 
 ## License
 
