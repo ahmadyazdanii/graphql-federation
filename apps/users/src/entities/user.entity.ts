@@ -1,14 +1,15 @@
-import { ObjectType, Field } from '@nestjs/graphql';
+import { ObjectType, Field, Directive, ID } from '@nestjs/graphql';
 import { UUID } from 'crypto';
 
 @ObjectType()
+@Directive('@key(fields: "id")')
 export class User {
-  @Field(() => String)
+  @Field(() => ID)
   id: UUID;
 
-  @Field(() => String)
+  @Field()
   full_name: string;
 
-  @Field(() => String)
+  @Field()
   email: string;
 }

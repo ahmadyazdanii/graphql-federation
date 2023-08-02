@@ -4,17 +4,17 @@ import { UsersResolver } from './users.resolver';
 import {
   ApolloFederationDriverConfig,
   ApolloFederationDriver,
-  ApolloDriverConfig,
-  ApolloDriver,
 } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { UsersRepository } from './users.repository';
 
 @Module({
   imports: [
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      autoSchemaFile: true,
+    GraphQLModule.forRoot<ApolloFederationDriverConfig>({
+      driver: ApolloFederationDriver,
+      autoSchemaFile: {
+        federation: 2,
+      },
     }),
   ],
   providers: [UsersResolver, UsersService, UsersRepository],
