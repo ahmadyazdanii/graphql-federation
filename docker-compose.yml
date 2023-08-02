@@ -1,0 +1,66 @@
+version: "3.9"
+services:
+  user-service:
+    build:
+      context: .
+      args:
+        - SERVICE_NAME=users
+    image: "gql-federation/user"
+    container_name: "user-service"
+    restart: always
+    networks:
+      - gql-net
+    expose:
+      - 3000
+
+  post-service:
+    build:
+      context: .
+      args:
+        - SERVICE_NAME=posts
+    image: "gql-federation/post"
+    container_name: "post-service"
+    depends_on:
+      - user-service
+    restart: always
+    networks:
+      - gql-net
+    expose:
+      - 3000
+
+  comment-service:
+    build:
+      context: .
+      args:
+        - SERVICE_NAME=comments
+    image: "gql-federation/comment"
+    container_name: "comment-service"
+    depends_on:
+      - user-service
+      - post-service
+    restart: always
+    networks:
+      - gql-net
+    expose:
+      - 3000
+
+  gateway-service:
+    build:
+      context: .
+      args:
+        - SERVICE_NAME=gateway
+    image: "gql-federation/gateway"
+    container_name: "gateway-service"
+    depends_on:
+      - user-service
+      - post-service
+      - comment-service
+    restart: always
+    networks:
+      - gql-net
+    ports:
+      - 3000:3000
+
+networks:
+  gql-net:
+
